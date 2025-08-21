@@ -45,3 +45,5 @@ def main():
     print("Welcome to Harangad's Number Guessing Game!") # Display a welcome message
     display_rules()
     play_game()
+
+main()

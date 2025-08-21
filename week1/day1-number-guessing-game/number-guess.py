@@ -23,6 +23,7 @@ number_to_guess = generate_number()
 def easy_game():
     attempts = 1
 
+    print("\nLevel: Easy")
     print("\nI have thought of a number between 1 and 100. Try to guess it in 10 attempts!") # Prompt the user to start guessing
     player_guess = int(input("Enter your guess: ")) # Get the player's first guess
 
@@ -44,6 +45,7 @@ def easy_game():
 def medium_game():
     attempts = 1
 
+    print("\nLevel: Medium")
     print("\nI have thought of a number between 1 and 100. Try to guess it in 7 attempts!") # Prompt the user to start guessing
     player_guess = int(input("Enter your guess: ")) # Get the player's first guess
 
@@ -65,6 +67,7 @@ def medium_game():
 def hard_game():
     attempts = 1
 
+    print("\nLevel: Hard")
     print("\nI have thought of a number between 1 and 100. Try to guess it in 5 attempts!") # Prompt the user to start guessing
     player_guess = int(input("Enter your guess: ")) # Get the player's first guess
 

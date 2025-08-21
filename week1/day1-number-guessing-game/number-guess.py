@@ -108,3 +108,5 @@ def main():
         medium_game()
     elif difficulty == "hard":
         hard_game()
+
+main()

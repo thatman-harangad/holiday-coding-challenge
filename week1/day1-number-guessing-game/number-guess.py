@@ -12,6 +12,7 @@ def generate_number():
     return random.randint(1, 100)
     
 number_to_guess = generate_number()
+attempts = 0
 
 def play_game():
     print("\nI have thought of a number between 1 and 100. Try to guess it!") # Prompt the user to start guessing
@@ -21,11 +22,13 @@ def play_game():
     while player_guess != number_to_guess:
         if player_guess < number_to_guess: 
             print("Your guess is too low! Try again.")
+            attempts += 1
         else:
             print("Your guess is too high! Try again.")
+            attempts += 1
         player_guess = int(input("Enter your guess: "))
 
-    print("\nCongratulations! You've guessed the number correctly!") # Congratulate the player for guessing correctly
+    print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
     play_again() # Ask the player if they want to play again
 
 # Function to handle ending the game

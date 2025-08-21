@@ -1,3 +1,4 @@
+import tkinter as tk # Import the tkinter module, allowing us to create a GUI for the game.
 import random # Import the random module, allowing us to use a random number generation function.
 
 # Display the rules of the game.
@@ -164,6 +165,6 @@ def main():
             break
         else:
             print("Invalid input! Please enter 'Easy', 'Medium', or 'Hard'.")
-            
+
 # Running the game
 main()

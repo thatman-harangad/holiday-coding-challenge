@@ -1,170 +1,99 @@
 import tkinter as tk # Import the tkinter module, allowing us to create a GUI for the game.
 import random # Import the random module, allowing us to use a random number generation function.
 
-# Display the rules of the game.
-def display_rules():
-    print("\nRules: \n")
-    print("1. I will think of a number between 1 and 100.")
-    print("2. You have to guess the number.")
-    print("3. I will tell you if your guess is too high, too low, or correct.")
+# Global variables
+number_to_guess = 0  # This will hold the number that the player has to guess
+attempts_left = 0  # This will hold the number of attempts the player has left
+max_attempts = 0  # This will hold the maximum number of attempts allowed
 
-# Display difficulty options.
-def display_difficulty_options():
-    print("\nThere are 3 different difficulties; Easy, Medium & Hard.")
-    print("\nThe difficulty will affect the number of attempts you receive to guess the number.")
-    print("Easy will give you 10 attempts.")
-    print("Medium will give you 7 attempts.")
-    print("Hard will give you 5 attempts.")
-    print("\nBefore we get started, choose your difficulty!")
+def start_game(max_attempts):
+    global number_to_guess, attempts_left
+    number_to_guess = random.randint(1, 100)  # Generate a random number between 1 and 100
+    attempts_left = max_attempts
 
-# Generate a random number.
-def generate_number():
-    return random.randint(1, 100)
+    difficulty_frame.pack_forget()  # Hide the difficulty selection frame
+    game_frame.pack()
+    result_label = tk.Label(result_frame, text=f"I have chosen a number between 1 and 100.\nYou have {attempts_left} attempts!")
+    result_label.pack()
 
-# Function to handle the easy game mode.
-def easy_game():
-    number_to_guess = generate_number()
-    attempts = 1
+def check_guess():
+    global attempts_left
+    user_guess = int(entry.get())  # Get the user's guess from the entry widget
+    entry.delete(0, tk.END)  # Clear the entry widget for the next guess
 
-    print("\nLevel: Easy")
-    print("\nI have thought of a number between 1 and 100. Try to guess it in 10 attempts!")
-    while True:
-        try:
-            player_guess = int(input("Enter your guess: "))
-            break
-        except ValueError:
-            print("Invalid input! Please enter an integer between 1 and 100.")
-
-    # Check if the player's guess is correct.
-    # Continue looping until player's guess is correct, or they run out of attempts.
-    while player_guess != number_to_guess and attempts < 10:
-        if player_guess < number_to_guess:
-            print("Your guess is too low! Try again.")
+    while attempts_left > 0:
+        if user_guess == number_to_guess:
+            result_label = tk.Label(result_frame, text=f"🎉 Correct! The number was {number_to_guess}.")
         else:
-            print("Your guess is too high! Try again.")
-        while True:
-            try:
-                player_guess = int(input("Enter your guess: "))
-                break
-            except ValueError:
-                print("Invalid input! Please enter an integer between 1 and 100.")
-        attempts += 1 # Increment attempts after every guess.
+            if user_guess < number_to_guess:
+                result_label = tk.Label(result_frame, text="📉 Too low!")
+            else:
+                result_label = tk.Label(result_frame, text="📈 Too high!")
 
-    # Check if player guessed the number within the set attempts.
-    if player_guess == number_to_guess:
-        print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!")
-    else:
-        print(f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
-    play_again()
+    attempts_left -= 1
 
-# Function to handle the medium game mode.
-def medium_game():
-    number_to_guess = generate_number()
-    attempts = 1
+    if attempts_left == 0:
+        result_label = tk.Label(result_frame, text=f"💔 Game over! The number was {number_to_guess}.")
+    result_label.pack()
 
-    print("\nLevel: Medium")
-    print("\nI have thought of a number between 1 and 100. Try to guess it in 7 attempts!")
-    while True:
-        try:
-            player_guess = int(input("Enter your guess: "))
-            break
-        except ValueError:
-            print("Invalid input! Please enter an integer between 1 and 100.")
+def disable_game():
+    submit_btn.config(state=tk.DISABLED)
+    play_again_btn.pack()
 
-    # Check if the player's guess is correct.
-    # Continue looping until player's guess is correct, or they run out of attempts.
-    while player_guess != number_to_guess and attempts < 7:
-        if player_guess < number_to_guess:
-            print("Your guess is too low! Try again.")
-        else:
-            print("Your guess is too high! Try again.")
-        while True:
-            try:
-                player_guess = int(input("Enter your guess: "))
-                break
-            except ValueError:
-                print("Invalid input! Please enter an integer between 1 and 100.")
-        attempts += 1 # Increment attempts after every guess.
+def reset_game():
+    entry.delete(0, tk.END)
+    submit_btn.config(state=tk.NORMAL)
+    play_again_btn.pack_forget()
+    game_frame.pack_forget()
+    difficulty_frame.pack()
 
-    # Check if player guessed the number within the set attempts.
-    if player_guess == number_to_guess:
-        print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!")
-    else:
-        print(f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
-    play_again()
+# GUI Setup
 
-# Function to handle the hard game mode.
-def hard_game():
-    number_to_guess = generate_number()
-    attempts = 1
+window = tk.Tk()  # Create the main window
+window.title("Harangad's Number Guessing Game")  # Set the title of the window
+window.geometry("1200x800")  # Set the size of the window
 
-    print("\nLevel: Hard")
-    print("\nI have thought of a number between 1 and 100. Try to guess it in 5 attempts!")
-    while True:
-        try:
-            player_guess = int(input("Enter your guess: "))
-            break
-        except ValueError:
-            print("Invalid input! Please enter an integer between 1 and 100.")
+welcome_frame = tk.Frame(window)  # Create a frame for the welcome message
+welcome_frame.pack()
 
-    # Check if the player's guess is correct.
-    # Continue looping until player's guess is correct, or they run out of attempts.
-    while player_guess != number_to_guess and attempts < 5:
-        if player_guess < number_to_guess:
-            print("Your guess is too low! Try again.")
-        else:
-            print("Your guess is too high! Try again.")
-        while True:
-            try:
-                player_guess = int(input("Enter your guess: "))
-                break
-            except ValueError:
-                print("Invalid input! Please enter an integer between 1 and 100.")
-        attempts += 1 # Increment attempts after every guess.
+welcome_label = tk.Label(welcome_frame, text="Welcome to Harangad's Number Guessing Game!")
+welcome_label.pack()
 
-    # Check if player guessed the number within the set attempts.
-    if player_guess == number_to_guess:
-        print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!")
-    else:
-        print(f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
-    play_again()
+rules_frame = tk.Frame(window)  # Create a frame for rules
+rules_frame.pack()
 
-# Function to handle ending the game
-def end_game():
-    print("\nGame Over!")
-    print("Thank you for playing!")
+rules_label = tk.Label(rules_frame, text="Rules: \n1. I will think of a number between 1 and 100.\n2. You have to guess the number.\n3. I will tell you if your guess is too high, too low, or correct.")
+rules_label.pack()
 
-# Function to handle playing again
-def play_again():
-    while True:
-        response = input("\nDo you want to play again? (Yes/No): ")
-        if response.lower() in ['yes', 'y']:
-            main()
-            break
-        elif response.lower() in ['no', 'n']:
-            end_game()
-            break
-        else:
-            print("Invalid input! Please enter 'Yes' or 'No'.")
+difficulty_options_frame = tk.Frame(window)
+difficulty_options_frame.pack()
 
-# Main function to start the game
-def main():
-    print("Welcome to Harangad's Number Guessing Game!")
-    display_rules()
-    display_difficulty_options()
-    while True:
-        difficulty = input("Enter Easy, Medium or Hard: ").strip().lower()
-        if difficulty == "easy":
-            easy_game()
-            break
-        elif difficulty == "medium":
-            medium_game()
-            break
-        elif difficulty == "hard":
-            hard_game()
-            break
-        else:
-            print("Invalid input! Please enter 'Easy', 'Medium', or 'Hard'.")
+difficulty_options_label = tk.Label(difficulty_options_frame, text="\nThere are 3 different difficulties; Easy, Medium & Hard.\nThe difficulty will affect the number of attempts you receive to guess the number.\nEasy will give you 10 attempts.\nMedium will give you 7 attempts.\nHard will give you 5 attempts.")
+difficulty_options_label.pack()
 
-# Running the game
-main()
+difficulty_frame = tk.Frame(window)  # Create a frame for difficulty options
+difficulty_frame.pack()
+
+difficulty_label = tk.Label(difficulty_frame, text="Before we get started, choose your difficulty!")
+difficulty_label.pack()
+
+tk.Button(difficulty_frame, text="Easy", command=lambda: start_game(10)).pack(side=tk.LEFT, padx=5, pady=5)  # Easy difficulty
+tk.Button(difficulty_frame, text="Medium", command=lambda: start_game(7)).pack(side=tk.LEFT, padx=5, pady=5)  # Medium difficulty
+tk.Button(difficulty_frame, text="Hard", command=lambda: start_game(5)).pack(side=tk.LEFT, padx=5, pady=5)  # Hard difficulty
+
+game_frame = tk.Frame(window) # Create a frame for the game
+game_frame.pack()
+
+entry = tk.Entry(game_frame)
+entry.pack(pady=10)
+
+submit_btn = tk.Button(game_frame, text="Submit Guess", command=check_guess)
+submit_btn.pack(pady=5)
+
+result_frame = tk.Frame(window)  # Create a frame for the result
+result_frame.pack()
+
+play_again_btn = tk.Button(game_frame, text="Play Again", command=reset_game)
+play_again_btn.pack(pady=5)
+
+window.mainloop()

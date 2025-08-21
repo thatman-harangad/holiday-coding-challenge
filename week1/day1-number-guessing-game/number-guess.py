@@ -8,11 +8,11 @@ def display_rules():
     print("3. I will tell you if your guess is too high, too low, or correct.")
 
 def display_difficulty_options():
-    print("\tThere are 3 different difficulties; Easy, Medium & Hard.")
-    print("\n\tThe difficulty will affect the number of attempts you receive to guess the number.")
-    print("\tEasy will give you 10 attempts.")
-    print("\tMedium will give you 7 attempts.")
-    print("\tHard will give you 5 attempts.")
+    print("\nThere are 3 different difficulties; Easy, Medium & Hard.")
+    print("\nThe difficulty will affect the number of attempts you receive to guess the number.")
+    print("Easy will give you 10 attempts.")
+    print("Medium will give you 7 attempts.")
+    print("Hard will give you 5 attempts.")
     print("\nBefore we get started, choose your difficulty!")
 
 def generate_number():
@@ -36,9 +36,9 @@ def easy_game():
         attempts += 1 # Increment the number of attempts after each guess
 
     if attempts < 10:
-        (f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
+        print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
     else:
-        (f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
+        print(f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
     play_again() # Ask the player if they want to play again
 
 def medium_game():
@@ -57,9 +57,9 @@ def medium_game():
         attempts += 1 # Increment the number of attempts after each guess
 
     if attempts < 7:
-        (f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
+        print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
     else:
-        (f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
+        print(f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
     play_again() # Ask the player if they want to play again
 
 def hard_game():
@@ -78,9 +78,9 @@ def hard_game():
         attempts += 1 # Increment the number of attempts after each guess
 
     if attempts < 5:
-        (f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
+        print(f"\nCongratulations! You've guessed the number correctly in {attempts} attempts!") # Congratulate the player for guessing correctly
     else:
-        (f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
+        print(f"\nSorry, you've used all your attempts. The number was {number_to_guess}.")
     play_again() # Ask the player if they want to play again
 
 # Function to handle ending the game

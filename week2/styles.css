@@ -1,0 +1,26 @@
+body {
+  font: Arial, sans-serif;
+  background-color: aqua;
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+}
+
+h1 {
+  color: white;
+  text-align: center;
+}
+
+button {
+    background-color: gray;
+    border-color: black;
+    border-radius: 8px;
+    cursor: pointer;
+    color: black;
+}
+
+button:hover {
+    background-color: lightgray;
+    color: black;
+    cursor: pointer;
+}

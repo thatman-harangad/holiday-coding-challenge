@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    font: Arial, sans-serif;
+    background-color: aqua;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: black;
+}
+
+button {
+    background-color: lightblue;
+    border-color: black;
+    margin-right: 4px;
+    font: inherit;
+    color: black;
+}
+
+#increment:hover {
+    background-color: lime;
+    color: black;
+}
+
+#decrement:hover {
+    background-color: red;
+    color: black;
+}
+
+#reset:hover {
+    background-color: orange;
+    color: black;
+}
